@@ -11,7 +11,18 @@ class MoviesController < ApplicationController
   end
 
   def index
+    if params[:sort]=="title"
+      @title_header = {:order => :title}, 'hilite'
+      @movies = Movie.all.order("Title")  # that is the command that orders ascendent
+    elsif params[:sort] == "release_date"
+      @release_date_header = {:order => :release_date}, 'hilite'
+      @movies = Movie.all.order(:release_date)  # that is the command that orders ascendent  ///RELEASE DATE!!
+      
+    else
+  
     @movies = Movie.all
+    end
+    #@movies = Movie.all
   end
 
   def new
